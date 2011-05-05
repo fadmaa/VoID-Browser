@@ -1,0 +1,129 @@
+.schema-alignment-dialog-canvas {
+  height: 375px;
+  overflow: auto;
+  padding: 10px;
+  margin-top: 3px;
+  background: white;
+}
+
+table.schema-alignment-table-layout {
+  border-collapse: collapse;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 1em;
+}
+
+table.schema-alignment-table-layout .padded {
+  padding: 3px 6px;
+}
+
+div.schema-alignment-detail-container {
+  border-left: 3px solid #eee;
+}
+
+td.schema-alignment-node-main, td.schema-alignment-link-main {
+  white-space: pre;
+  width: 300px;
+}
+
+td.schema-alignment-node-main {
+	vertical-align:top;
+}
+
+td.schema-alignment-node-toggle, td.schema-alignment-link-toggle {
+  white-space: pre;
+  width: 1%;
+}
+
+td.schema-alignment-node-toggle img, td.schema-alignment-link-toggle img {
+  cursor: pointer;
+  padding: 2px;
+}
+
+
+a.schema-alignment-node-tag {
+  padding: 3px 6px;
+  text-decoration: none;
+  color: black;
+}
+
+a.schema-alignment-node-tag:hover {
+  background: #888;
+  color: white;
+}
+
+.schema-alignment-node-column {
+  font-weight: bold;
+}
+
+a.schema-alignment-link-tag {
+  padding: 3px 6px;
+  text-decoration: none;
+  color: black;
+}
+
+a.schema-alignment-link-tag:hover {
+  color: #88f;
+}
+
+div.schema-alignment-dialog-preview {
+  height: 400px;
+  overflow: auto;
+  background: white;
+  padding: 10px;
+  margin-top: 3px;
+  white-space: pre;
+  font-family: monospace;
+  font-size: 9pt;
+}
+
+.schema-alignment-status-indicator {
+  color: #red;
+}
+/*--------------------------------------------------
+ *  Node dialog
+ *--------------------------------------------------
+ */
+
+.schema-align-node-dialog-node-type {
+  padding: 0.25em;
+  background: #ddf;
+}
+
+.schema-align-node-dialog-node-type input {
+  vertical-align: text-bottom;
+}
+
+.schema-alignment-node-dialog-column-list {
+  height: 300px;
+  width: 200px;
+  overflow: auto;
+  border: 1px solid #ddd;
+}
+/*--------------------------------------------------
+ *  Link dialog
+ *--------------------------------------------------
+ */
+
+.schema-alignment-link-menu-section {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.schema-alignment-link-menu-section-last {
+  padding: 8px;
+}
+
+
+.schema-alignment-dialog-canvas td, .schema-alignment-dialog-canvas img{
+	vertical-align:top;
+	}
+	
+td.multiresources{
+	border:solid 3px #AA99CC;
+	padding:4px;
+	}
+td.multiliterals{
+	border:solid 3px #DDDDDD;
+	padding:4px;
+	}
