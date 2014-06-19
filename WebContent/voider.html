@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Voider</title>
+</head>
+<body>
+<div id="container">
+  <div>
+    <h2>Start browsing from VoiD URI</h2>
+    <form method="GET" action="browser.html">
+      VoiD URI:<input type="text" name="void" size="60" value="http://acm.rkbexplorer.com/id/void"/> <input type="submit" value="Browse"/>
+    </form> 
+  </div>
+  <div>
+    <h2>Alternatively, provide the details below:</h2>
+    <form method="GET" action="tree.html">
+    	SPARQL endpoint: <input type="text" value="http://api.talis.com/stores/bbc-backstage/services/sparql" size="60" name="sparqlEndpoint"/> <br/>
+    	Resource URI:<input type="text" value="http://www.bbc.co.uk/programmes/b0074fmn#programme" size="60" name="resource"/><br/>
+    	Depth:<input type="text" value="3" size="2" name="depth"/><br/>
+    	<input type="submit" value="Browse"/>
+    </form>
+  </div>
+</div>
+</body>
+</html>

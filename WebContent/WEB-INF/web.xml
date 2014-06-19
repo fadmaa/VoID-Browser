@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <servlet>
+  	<servlet-name>voiderit</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.VoiderServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>voidbrowse</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.VoidBrowserServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>voidDatasets</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.VoidDatasetsServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>voidPartitions</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.VoidClassPartitionsServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>typeStructure</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.InstanceOfTypeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>voiderit</servlet-name>
+    <url-pattern>/voiderit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>voidbrowse</servlet-name>
+    <url-pattern>/voidbrowse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>voidDatasets</servlet-name>
+  	<url-pattern>/voidDatasets</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>voidPartitions</servlet-name>
+  	<url-pattern>/voidPartitions</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>typeStructure</servlet-name>
+  	<url-pattern>/typeStructure</url-pattern>
+  </servlet-mapping>
+  
+  <display-name>voider</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
