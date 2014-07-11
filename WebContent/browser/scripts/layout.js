@@ -13,5 +13,13 @@ $(function(){
 	$("#typesCloud").click(function(e){
 		e.preventDefault();
 		getTypes(sparqlEndpoint);
+		$("#resourcesCloud").attr("class", "inactive");
+		$("#typeesCloud").attr("class", "active");
+	});
+	$("#resourcesCloud").click(function(e){
+		e.preventDefault();
+		getResources(sparqlEndpoint);
+		$("#resourcesCloud").attr("class", "active");
+		$("#typeesCloud").attr("class", "inactive");
 	});
 });

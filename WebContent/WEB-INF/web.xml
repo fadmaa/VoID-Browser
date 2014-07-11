@@ -17,6 +17,10 @@
   	<servlet-class>org.deri.voider.servlet.ClassPartitionsServlet</servlet-class>
   </servlet>
   <servlet>
+  	<servlet-name>resources</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.ResourcesServlet</servlet-class>
+  </servlet>
+  <servlet>
   	<servlet-name>typeStructure</servlet-name>
   	<servlet-class>org.deri.voider.servlet.InstanceOfTypeServlet</servlet-class>
   </servlet>
@@ -36,6 +40,10 @@
   <servlet-mapping>
   	<servlet-name>types</servlet-name>
   	<url-pattern>/types</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>resources</servlet-name>
+  	<url-pattern>/resources</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>typeStructure</servlet-name>
