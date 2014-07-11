@@ -10,6 +10,7 @@ import org.deri.voider.model.AnnotatedSet;
 import org.deri.voider.model.LiteralsNode;
 import org.deri.voider.model.Node;
 import org.deri.voider.model.ResourcesNode;
+import org.deri.voider.sparql.tagcloud.model.ClassPartition;
 
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -94,6 +95,21 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy{
 		  }
 	}
 
+	@Override
+	public Set<ClassPartition> classes(int limit) {
+		logger.debug("Executing \n" + TYPES_WITH_COUNTS_SPARQL);
+		long start = System.currentTimeMillis();
+		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri, TYPES_WITH_COUNTS_SPARQL + limit);
+		ResultSet res= qExec.execSelect();
+		long end = System.currentTimeMillis();
+		logger.debug("It took " + (end-start) + " milli second");
+		Set<ClassPartition> classes = new HashSet<ClassPartition>();
+		while(res.hasNext()){
+			QuerySolution sol = res.nextSolution();
+			classes.add(new ClassPartition(sol.getResource("c").getURI(), sol.getLiteral("count").getLong()));
+		}
+		return classes;
+	}
 	
 	public Map<String, AnnotatedSet> getValuesForSeveralProperties(Set<String> resources, String[] properties,int num) {
 		//TODO remove this
@@ -175,4 +191,7 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy{
 		}
 		return builder.toString();
 	}
+	
+	private final String TYPES_WITH_COUNTS_SPARQL = 
+			"SELECT ?c (COUNT(?s) AS ?count) WHERE {?s a ?c } GROUP BY ?c ORDER BY DESC(?count) LIMIT "; 
 }

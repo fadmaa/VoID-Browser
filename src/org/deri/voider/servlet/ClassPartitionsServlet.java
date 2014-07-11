@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.deri.voider.sparql.SparqlEndpointProxy;
+import org.deri.voider.sparql.SparqlEndpointProxyImpl;
 import org.deri.voider.sparql.tagcloud.VoidQuerier;
 import org.deri.voider.sparql.tagcloud.model.ClassPartition;
 import org.deri.voider.util.PrefixManager;
@@ -17,17 +19,24 @@ import org.json.JSONException;
 import org.json.JSONWriter;
 
 @SuppressWarnings("serial")
-public class VoidClassPartitionsServlet extends HttpServlet {
+public class ClassPartitionsServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String voidUrl = req.getParameter("voidUrl");
-		String dataset = req.getParameter("dataset");
+		String source = req.getParameter("source");
+		Set<ClassPartition> classes;
+		if(source.equals("void")){
+			String voidUrl = req.getParameter("voidUrl");
+			String dataset = req.getParameter("dataset");
+			VoidQuerier querier = new VoidQuerier();
+			classes = querier.classes(voidUrl, dataset);
+		}else{
+			String sparqlEndpoint = req.getParameter("sparql");
+			SparqlEndpointProxy endpoint = new SparqlEndpointProxyImpl(sparqlEndpoint);
+			classes = endpoint.classes(LIMIT_TYPES);
+		}
 		
-		VoidQuerier querier = new VoidQuerier();
-		Set<ClassPartition> classes = querier.classes(voidUrl, dataset);
-
 		InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
 		PrefixManager prefixManager = new PrefixManager(in);
 		
@@ -71,4 +80,5 @@ public class VoidClassPartitionsServlet extends HttpServlet {
 		doGet(req, resp);
 	}
 
+	private final int LIMIT_TYPES = 100;
 }

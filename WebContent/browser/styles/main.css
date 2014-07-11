@@ -1,0 +1,57 @@
+#header{
+	height: 26%;
+}
+
+#header div{
+	width:100%;
+}
+
+#mode a{
+	margin: 0 8 0 0px;
+	text-decoration: none;
+}
+
+#mode a.active{
+	color:#0000A9;
+}
+
+#mode a.inactive{
+	color:#ccc;
+}
+
+
+#mode{
+	height:15%;
+	text-align: center;
+}
+
+#cloud{
+	height:79%;
+	word-wrap: break-word;
+	overflow: scroll;
+}
+
+#cloud a{
+	margin:2 4 2 4px;
+}
+
+#collapse{
+	height: 2%;
+	background-color: #ccc;
+	text-align: center;
+	cursor: pointer; cursor: hand; 
+	margin:0 10 10 10px;
+}
+
+#collapse img{
+	height:100%;	
+}
+
+#tree{
+	height: 68%;
+}
+
+div.container{
+	border: solid 1px #ccc;
+	margin: 20 10 0 10px;
+}

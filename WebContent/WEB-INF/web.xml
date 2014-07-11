@@ -13,8 +13,8 @@
   	<servlet-class>org.deri.voider.servlet.VoidDatasetsServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>voidPartitions</servlet-name>
-  	<servlet-class>org.deri.voider.servlet.VoidClassPartitionsServlet</servlet-class>
+  	<servlet-name>types</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.ClassPartitionsServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>typeStructure</servlet-name>
@@ -34,8 +34,8 @@
   	<url-pattern>/voidDatasets</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>voidPartitions</servlet-name>
-  	<url-pattern>/voidPartitions</url-pattern>
+  	<servlet-name>types</servlet-name>
+  	<url-pattern>/types</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>typeStructure</servlet-name>
