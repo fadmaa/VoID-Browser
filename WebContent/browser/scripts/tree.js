@@ -209,11 +209,7 @@ TreeDrawer.isExpandableEdge = function(edge){
 };
 
 TreeDrawer.pivot = function(uris){
-	var s = window.location.href;
-	s = s.substring(0,s.indexOf("?")+1);
-	var params = TreeDrawer.getParams(); 
-	var depth = params["depth"]?params["depth"]:3;
-	window.location.href = s + $.param({sparqlEndpoint:params["sparqlEndpoint"],resource:TreeDrawer.spaceSeparateUris(uris),depth:depth});
+	drawTree(TreeDrawer.separateUris(uris,'+'));
 };
 
 TreeDrawer.getParams = function(){
@@ -233,6 +229,14 @@ TreeDrawer.spaceSeparateUris = function(uris){
 	var s = "";
 	for(var i=0;i<uris.length;i++){
 		s += uris[i].uri + " ";
+	}
+	return s;
+};
+
+TreeDrawer.separateUris = function(uris, ch){
+	var s = "";
+	for(var i=0;i<uris.length;i++){
+		s += uris[i].uri + ch;
 	}
 	return s;
 };

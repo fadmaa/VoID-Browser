@@ -42,7 +42,7 @@ function getResources(sparqlEndpoint){
 				 		.appendTo("#cloud").click(function(resourceUri){
 				 			return function(e){
 				 				e.preventDefault();
-				 				drawTree($('#tree'),resourceUri);
+				 				drawTree(resourceUri);
 				 			};
 				 		}(data.resources[i].uri));
 			 }
