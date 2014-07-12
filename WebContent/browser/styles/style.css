@@ -1,0 +1,24 @@
+a.literals{
+	background: #ddd;
+}
+
+a.mixed{
+	background: #FF3333;
+}
+	
+a.resources{
+	background: #AA99CC;
+	-moz-border-radius: 10px;
+}
+
+#tooltip{
+	position:absolute;
+	background:#DDD;
+	padding:10px;
+	opacity:0.9;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	font-size:10px;
+	display:none;
+}

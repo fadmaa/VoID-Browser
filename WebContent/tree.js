@@ -10,7 +10,7 @@ $(function(){
 		alert("sparqlEndpoint and resource parameters are required!");
 	}else{
 		$('#tree').empty().html('<img src="imgs/large-spinner.gif"/><div>fetching info about ' + resource + ' from ' + sparql);
-		$.get('voiderit',{"resource":resource,"sparql":sparql,"depth":depth},function(data){
+		$.get('structure',{"resource":resource,"sparql":sparql,"depth":depth},function(data){
 			if(data.code && data.code==='error'){
 				alert(data.msg);
 				$('#tree').empty().html('<div>Oops! something went wrong!</div>');

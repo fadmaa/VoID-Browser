@@ -39,7 +39,7 @@ public class ResourcesServlet extends HttpServlet {
 			writer.object();
 			writer.key("code");
 			writer.value("ok");
-			writer.key("classes");
+			writer.key("resources");
 			writer.array();
 			for(String r:resources){
 				writer.object();

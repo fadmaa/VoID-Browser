@@ -2,13 +2,20 @@
   <head>
     <title>RDF data browser</title>
     <link rel="stylesheet" type="text/csv" href="styles/main.css">
+    <link rel="stylesheet" type="text/csv" href="styles/schema-alignment-dialog.css">
+    <link rel="stylesheet" type="text/csv" href="styles/common.css">
+    <link rel="stylesheet" type="text/csv" href="styles/style.css">
     <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.tagcloud.js"></script>
     <script type="text/javascript" src="scripts/layout.js"></script>
+    <script type="text/javascript" src="scripts/structure.js"></script>
     <script type="text/javascript" src="scripts/tag_clouds.js"></script>
+    <script type="text/javascript" src="scripts/quicktip.js"></script>
+	<script type="text/javascript" src="scripts/dom.js"></script>
+	<script type="text/javascript" src="scripts/tree.js"></script>
   </head>
   <body>
-    <div id="header" class="container">
+    <div id="page-header" class="page-container">
       <div id="mode">
         <a href="#" class="inactive" id="resourcesCloud">Resources</a>
         <a href="#" class="active" id="typesCloud">Types</a>
@@ -18,6 +25,9 @@
     <div id="collapse">
       <img src="imgs/triangle_up.png" id="collpase_pointer" />
     </div>
-    <div id="tree" class="container"></div>
+    <div class="page-container">
+      <div id="controls"><input type="checkbox" id="hide_literals_tick" />Hide literals</div>
+      <div id="tree"></div>
+    </div>
   </body>
 </html>

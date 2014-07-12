@@ -1,0 +1,304 @@
+a.literals{
+	background: #ddd;
+}
+
+a.mixed{
+	background: #FF3333;
+}
+	
+a.resources{
+	background: #AA99CC;
+	-moz-border-radius: 10px;
+}
+
+#tooltip{
+	position:absolute;
+	background:#DDD;
+	padding:10px;
+	opacity:0.9;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	-webkit-border-radius:3px;
+	font-size:10px;
+	display:none;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+div.grid-layout > table {
+  border-collapse: separate;
+}
+
+div.grid-layout.layout-full > table {
+  width: 100%;
+  max-width: 100% !important;
+}
+
+div.grid-layout > table > tbody > tr > th, div.grid-layout > table > tbody > tr > td {
+  padding: 0px;
+  text-align: left;
+  vertical-align: baseline;
+}
+
+div.grid-layout.grid-layout-for-text > table > tbody > tr > th, div.grid-layout.grid-layout-for-text > table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+div.grid-layout.grid-layout-for-ui > table > tbody > tr > th, div.grid-layout.grid-layout-for-ui > table > tbody > tr > td {
+  vertical-align: top;
+}
+
+div.grid-layout.layout-normal {
+  margin: -10px;
+}
+
+div.grid-layout.layout-normal > table {
+  border-spacing: 10px;
+}
+
+div.grid-layout.layout-tight {
+  margin: -7px;
+}
+
+div.grid-layout.layout-tight > table {
+  border-spacing: 7px;
+}
+
+div.grid-layout.layout-tighter {
+  margin: -5px;
+}
+
+div.grid-layout.layout-tighter > table {
+  border-spacing: 5px;
+}
+
+div.grid-layout.layout-tightest {
+  margin: -3px;
+}
+
+div.grid-layout.layout-tightest > table {
+  border-spacing: 3px;
+}
+
+div.grid-layout.layout-loose {
+  margin: -15px;
+}
+
+div.grid-layout.layout-loose > table {
+  border-spacing: 15px;
+}
+
+div.grid-layout.layout-looser {
+  margin: -20px;
+}
+
+div.grid-layout.layout-looser > table {
+  border-spacing: 20px;
+}
+
+div.input-container {
+  padding: 3px;
+}
+
+div.input-container > input, div.input-container > textarea {
+  display: block;
+  width: 100%;
+  padding: 2px;
+  border: 1px inset;
+  margin-left: -3px;
+  margin-top: -3px;
+  vertical-align: top;
+}
+
+input.code, textarea.code {
+  font-family: monospace;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.hidden {
+  display: none;
+}
+
+.fbs-pane, .fbs-flyout-pane {
+  z-index: 2000;
+}
+
+.ui-widget {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+p.body-text {
+  margin-bottom: 1em;
+}
+
+#tree a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+#tree table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+#tree a {
+  color: #11c;
+  text-decoration: none;
+}
+
+#tree a:hover {
+  text-decoration: underline;
+}
+
+#tree a.secondary {
+  color: #4272db;
+}
+
+#tree a.action, #tree a.selected, #tree a.inaction {
+  margin: 0 3px;
+}
+
+#tree a.selected {
+  color: #000;
+  font-weight: bold;
+  cursor: default;
+}
+
+#tree a.inaction {
+  color: #999;
+}
+
+#tree a.selected:hover, #tree a.inaction:hover {
+  cursor: default;
+  text-decoration: none;
+}
+
+#tree a img {
+  border: 0;
+}
+
+#tree .button, #tree a.button {
+  display: inline-block;
+  overflow: visible;
+  font-size: 1em;
+  line-height: 1.4;
+  color: #000;
+  text-decoration: none;
+  padding: 1px 6px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  background: #eee;
+  white-space: nowrap;
+  font-family: Arial, Helvetica, sans-serif;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#tree .button:hover, #tree a.button:hover {
+  border: 1px solid #666;
+}
+
+#tree .button:active, #tree a.button:active {
+  border: 1px solid #000;
+}
+
+#tree .button-primary, #tree a.button-primary {
+  font-weight: bold;
+  padding: 1px 15px;
+}
+
+#tree .button-pill-left, #tree a.button-pill-left {
+  border-right: 1px solid #bbb;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#tree .button-pill-right, #tree a.button-pill-right {
+  border-left: 1px solid #fff;
+  -moz-border-radius-topleft: 0;
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+#tree .button-disabled,#tree  a.button-disabled, #tree .button.button-disabled, #tree a.button.button-disabled {
+  color: #666;
+  border: 1px solid #ddd;
+  background: #f3f3f3;
+  cursor: default;
+}
+
+#tree .button-disabled:hover, #tree a.button-disabled:hover {
+  color: #666;
+  border: 1px solid #ddd;
+  background: #f3f3f3;
+  cursor: default;
+}
+
+#tree .button img, #tree a.button img {
+  padding-left: 3px;
+}
+
+#tree .button-menu, #tree a.button-menu {
+  background: url(/images/down-arrow.png) no-repeat right 6px;
+  padding-right: 12px;
+}
+
+#tree .form-table th, #tree .form-table td {
+  vertical-align: top;
+  font-size: 1.3em;
+  padding: 2px;
+}
+
+#tree .form-table th {
+  text-align: left;
+  padding-top: 8px;
+  font-weight: bold;
+}
+
+#tree .list-table {
+  width: 100%;
+}
+
+#tree .list-table th, #tree .list-table td {
+  padding-top: 5px;
+  text-align: left;
+  vertical-align: baseline;
+  padding: 3px 5px;
+  font-size: 1.1em;
+  color: #777;
+  border-bottom: dotted 1px #ddd;
+}
+
+#tree .list-table th {
+  font-weight: bold;
+  color: #444;
+  background: #f2f2f2;
+}
+
+#tree .list-table-itemname {
+  font-size: 1.2em;
+}

@@ -1,7 +1,7 @@
 var sparqlEndpoint = "http://dbpedia.org/sparql";
 $(function(){
 	$("#collapse").click(function(){
-		$("#header").toggle();
+		$("#page-header").toggle();
 		var direction = $("#collpase_pointer").attr("src");
 		if(direction.indexOf("_up") == -1){
 			$("#collpase_pointer").attr("src","imgs/triangle_up.png");
@@ -14,12 +14,12 @@ $(function(){
 		e.preventDefault();
 		getTypes(sparqlEndpoint);
 		$("#resourcesCloud").attr("class", "inactive");
-		$("#typeesCloud").attr("class", "active");
+		$("#typesCloud").attr("class", "active");
 	});
 	$("#resourcesCloud").click(function(e){
 		e.preventDefault();
 		getResources(sparqlEndpoint);
 		$("#resourcesCloud").attr("class", "active");
-		$("#typeesCloud").attr("class", "inactive");
+		$("#typesCloud").attr("class", "inactive");
 	});
 });

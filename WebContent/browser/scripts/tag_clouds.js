@@ -37,16 +37,14 @@ function getResources(sparqlEndpoint){
 	$.get('../resources',{'sparql':sparqlEndpoint},function(data){
 		 if(data.code == 'ok'){
 			 $("#cloud").empty();
-			 for(var i=0; i< data.classes.length; i+=1){
-				 $("<a />").attr('href','#').attr("rel", data.classes[i].count).text(data.classes[i].curie).appendTo("#cloud");
-				 
-				 /*.click(function(dataset_url, typeUri){
-						 return function(e){
-					 		e.preventDefault();
-					 		showItemOfType(voidUrl, dataset_url, typeUri);
-						 };
-				 }(datasetUri, data.classes[i].uri))*/
-				
+			 for(var i=0; i< data.resources.length; i+=1){
+				 $("<a />").attr('href','#').attr("rel", data.resources[i].count).text(data.resources[i].curie)
+				 		.appendTo("#cloud").click(function(resourceUri){
+				 			return function(e){
+				 				e.preventDefault();
+				 				drawTree($('#tree'),resourceUri);
+				 			};
+				 		}(data.resources[i].uri));
 			 }
 			 $("#cloud a").tagcloud({
 			     size: {

@@ -1,8 +1,8 @@
-#header{
+#page-header{
 	height: 26%;
 }
 
-#header div{
+#page-header div{
 	width:100%;
 }
 
@@ -49,9 +49,14 @@
 
 #tree{
 	height: 68%;
+	overflow: auto;
+	font-size: 100%;
+  	font-family: Arial, sans-serif;
+  	background: #fff;
+  	padding:20px;
 }
 
-div.container{
+div.page-container{
 	border: solid 1px #ccc;
 	margin: 20 10 0 10px;
 }
