@@ -15,4 +15,5 @@ public interface SparqlEndpointProxy {
 	public String getResource(String typeUri);
 	public Set<ClassPartition> classes(int limit);
 	public Set<String> resources(Set<ClassPartition> classes, int limit);
+	public Set<String> resourcesOfType(String typeUri, int limit);
 }

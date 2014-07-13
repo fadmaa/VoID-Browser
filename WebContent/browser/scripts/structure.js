@@ -1,5 +1,8 @@
-var depth = 2;
-function drawTree(uri){
+function drawTree(uri,depth){
+	rootResources = uri;
+	if(! depth){
+		depth = $("#tree-depth").val();
+	}
 	var div = $('#tree');
 	div.empty().html('<img src="imgs/large-spinner.gif"/><div>fetching info about ' + uri);
 	$.get('../structure',{"resource":uri,"sparql":sparqlEndpoint,"depth":depth},function(data){

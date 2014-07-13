@@ -24,6 +24,10 @@
   	<servlet-name>typeStructure</servlet-name>
   	<servlet-class>org.deri.voider.servlet.InstanceOfTypeServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>resourcesOfType</servlet-name>
+  	<servlet-class>org.deri.voider.servlet.ResourcesOfTypeServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>structure</servlet-name>
@@ -48,6 +52,10 @@
   <servlet-mapping>
   	<servlet-name>typeStructure</servlet-name>
   	<url-pattern>/typeStructure</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>resourcesOfType</servlet-name>
+  	<url-pattern>/resourcesOfType</url-pattern>
   </servlet-mapping>
   
   <display-name>voider</display-name>

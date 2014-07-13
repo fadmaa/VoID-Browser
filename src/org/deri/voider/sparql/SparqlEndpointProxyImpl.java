@@ -50,6 +50,20 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		return ps;
 	}
 
+	
+	@Override
+	public Set<String> resourcesOfType(String typeUri, int limit) {
+		Set<String> resources = new HashSet<String>();
+		String sparql = "SELECT DISTINCT ?s WHERE { ?s a <" + typeUri + "> } LIMIT " + limit;
+		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri, sparql);
+		ResultSet res = qExec.execSelect();
+		while (res.hasNext()) {
+			QuerySolution sol = res.nextSolution();
+			resources.add(sol.getResource("s").getURI());
+		}
+		return resources;
+	}
+
 	@Override
 	public Set<String> resources(Set<ClassPartition> classes, int limit) {
 		List<String> resources = new ArrayList<String>(limit + 10);
@@ -102,7 +116,7 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 	public Node getValues(Set<String> resources, String property) {
 		// TODO remove this
 		try {
-			Thread.sleep(300);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}

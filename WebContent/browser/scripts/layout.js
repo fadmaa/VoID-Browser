@@ -1,4 +1,5 @@
 var sparqlEndpoint = "http://dbpedia.org/sparql";
+var rootResources = "";
 $(function(){
 	$("#collapse").click(function(){
 		$("#page-header").toggle();
@@ -21,5 +22,10 @@ $(function(){
 		getResources(sparqlEndpoint);
 		$("#resourcesCloud").attr("class", "active");
 		$("#typesCloud").attr("class", "inactive");
+	});
+	$("#tree-depth").change(function(){
+		if(rootResources){
+			drawTree(rootResources, $("#tree-depth").val());
+		}
 	});
 });
