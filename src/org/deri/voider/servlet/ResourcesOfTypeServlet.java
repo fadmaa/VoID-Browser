@@ -24,16 +24,17 @@ public class ResourcesOfTypeServlet extends HttpServlet{
 		String sparqlEndpoint = req.getParameter("sparql");
 		String typeUri = req.getParameter("type");
 		SparqlEndpointProxy endpoint = new SparqlEndpointProxyImpl(sparqlEndpoint);
-		Set<String> resources = endpoint.resourcesOfType(typeUri, LIMIT_RESOURCES);
-		
-		InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
-		PrefixManager prefixManager = new PrefixManager(in);
 		
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Content-Type", "application/json");
 		Writer w = resp.getWriter();
 		JSONWriter writer = new JSONWriter(w);
 		try {
+			Set<String> resources = endpoint.resourcesOfType(typeUri, LIMIT_RESOURCES);
+			
+			InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
+			PrefixManager prefixManager = new PrefixManager(in);
+			
 			writer.object();
 			writer.key("code");
 			writer.value("ok");

@@ -9,11 +9,12 @@ import org.deri.voider.sparql.tagcloud.model.ClassPartition;
 
 public interface SparqlEndpointProxy {
 
-	public Set<String> getAdjacentProperties(String resource);
-	public Node getValues(Set<String> resources, String property);
-	public Map<String, AnnotatedSet> getValuesForSeveralProperties(Set<String> resources, String[] properties,int num);
-	public String getResource(String typeUri);
-	public Set<ClassPartition> classes(int limit);
-	public Set<String> resources(Set<ClassPartition> classes, int limit);
-	public Set<String> resourcesOfType(String typeUri, int limit);
+	public Set<String> getAdjacentProperties(String resource) throws Exception;
+	public Node getValues(Set<String> resources, String property)throws Exception;
+	public Map<String, AnnotatedSet> getValuesForSeveralProperties(Set<String> resources, String[] properties,int num)throws Exception;
+	public Map<String, AnnotatedSet> getNeighbours(Set<String> resources)throws Exception;
+	public String getResource(String typeUri)throws Exception;
+	public Set<ClassPartition> classes(int limit)throws Exception;
+	public Set<String> resources(Set<ClassPartition> classes, int limit)throws Exception;
+	public Set<String> resourcesOfType(String typeUri, int limit)throws Exception;
 }

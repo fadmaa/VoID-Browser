@@ -6,13 +6,19 @@ import java.util.Set;
 public class AnnotatedSet {
 	private int type;
 	private final Set<String> values;
+	private final int sizeLimit;
 	public AnnotatedSet(Set<String> value) {
 		this.type = UNKNOWN;
 		this.values = value;
+		this.sizeLimit = -1;
 	}
 	public AnnotatedSet(int t){
+		this(t,-1);
+	}
+	public AnnotatedSet(int t, int sizeLimit){
 		this.values = new HashSet<String>();
 		this.type = t;
+		this.sizeLimit = sizeLimit;
 	}
 	public int getType() {
 		return type;
@@ -28,7 +34,9 @@ public class AnnotatedSet {
 		}
 	}
 	public void add(String s){
-		this.values.add(s);
+		if(this.sizeLimit >0 & this.values.size() < sizeLimit){
+			this.values.add(s);
+		}
 	}
 	public boolean isEmpty(){
 		return values.isEmpty();

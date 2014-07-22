@@ -26,7 +26,7 @@ public class TreeBuilder {
 		sparqlEndpoint = sparqlProxy;
 	}
 	
-	public ResourcesNode tree(String startingUris,int limit){
+	public ResourcesNode tree(String startingUris,int limit) throws Exception{
 		long start = System.currentTimeMillis();
 		//initiailization
 		ResourcesNode startingNode = new ResourcesNode(expand(startingUris));
@@ -43,31 +43,7 @@ public class TreeBuilder {
 				break;
 			}
 			ResourcesNode n = wn.node;
-			Map<String, AnnotatedSet> map = new HashMap<String, AnnotatedSet>();
-			for(String uri:n.getResources()){
-				Set<String> props = sparqlEndpoint.getAdjacentProperties(uri);
-				
-				//prepare structure for bulk-querying
-				int i = 0;
-				String[] propertiesGroup = new String[groupSize];
-				for(String p:props){
-					if(i<groupSize){
-						propertiesGroup[i] = p;
-						i +=1;
-						continue;
-					}
-					//we have collected enough properties let's query now
-					addAnnotatedSets(map,sparqlEndpoint.getValuesForSeveralProperties(n.getResources(), propertiesGroup,i));
-					
-					//reset counters
-					i = 0;
-					propertiesGroup = new String[groupSize];
-				}
-				//now, any left properties that haven't been queried yet
-				if(i>0){
-					addAnnotatedSets(map,sparqlEndpoint.getValuesForSeveralProperties(n.getResources(), propertiesGroup,i));
-				}
-			}
+			Map<String, AnnotatedSet> map = sparqlEndpoint.getNeighbours(n.getResources());
 			for(Entry<String, AnnotatedSet> entry:map.entrySet()){
 				Node o = getNode(entry.getValue());
 				String prop = entry.getKey();

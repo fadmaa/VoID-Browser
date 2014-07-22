@@ -2,11 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <servlet>
   	<servlet-name>structure</servlet-name>
-  	<servlet-class>org.deri.voider.servlet.VoiderServlet</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>voidbrowse</servlet-name>
-  	<servlet-class>org.deri.voider.servlet.VoidBrowserServlet</servlet-class>
+  	<servlet-class>org.deri.voider.servlet.StructureServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>voidDatasets</servlet-name>
@@ -32,10 +28,6 @@
   <servlet-mapping>
     <servlet-name>structure</servlet-name>
     <url-pattern>/structure</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>voidbrowse</servlet-name>
-    <url-pattern>/voidbrowse</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>voidDatasets</servlet-name>

@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONWriter;
 
 @SuppressWarnings("serial")
-public class VoiderServlet extends HttpServlet{
+public class StructureServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

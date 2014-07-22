@@ -66,6 +66,8 @@ function getResources(sparqlEndpoint){
 function showItemOfType(typeUri){
 	//get resources
 	$("#cloud").empty().html('<img src="imgs/large-spinner.gif"/><div>Loading resources of type ' +  typeUri + ' from ' + sparqlEndpoint + ' </div>');
+	$("#resourcesCloud").attr("class", "active");
+	$("#typesCloud").attr("class", "inactive");
 	$.get("../resourcesOfType",{'sparql':sparqlEndpoint,'type':typeUri},function(data){
 		//populate the resources tab
 		if(data.code == 'ok'){
@@ -94,9 +96,6 @@ function showItemOfType(typeUri){
 		 } else{
 			 alert(data.msg);
 		 }
-		
-		$("#resourcesCloud").attr("class", "active");
-		$("#typesCloud").attr("class", "inactive");
 		//draw tree
 		drawTree(data.resources[0].uri);
 	},"json");

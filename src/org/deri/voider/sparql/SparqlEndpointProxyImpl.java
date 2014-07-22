@@ -1,5 +1,12 @@
 package org.deri.voider.sparql;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,10 +22,9 @@ import org.deri.voider.model.Node;
 import org.deri.voider.model.ResourcesNode;
 import org.deri.voider.sparql.tagcloud.model.ClassPartition;
 
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -33,13 +39,11 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		this.endpointUri = endpointUri;
 	}
 
-	public Set<String> getAdjacentProperties(String resource) {
+	public Set<String> getAdjacentProperties(String resource) throws Exception {
 		String sparql = "SELECT DISTINCT ?p WHERE{<" + resource + "> ?p ?o.}";
 		logger.debug("Executing \n" + sparql);
 		long start = System.currentTimeMillis();
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri,
-				sparql);
-		ResultSet res = qExec.execSelect();
+		ResultSet res = execSelect(sparql);
 		long end = System.currentTimeMillis();
 		logger.debug("It took " + (end - start) + " milli second");
 		Set<String> ps = new HashSet<String>();
@@ -50,13 +54,13 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		return ps;
 	}
 
-	
 	@Override
-	public Set<String> resourcesOfType(String typeUri, int limit) {
+	public Set<String> resourcesOfType(String typeUri, int limit)
+			throws Exception {
 		Set<String> resources = new HashSet<String>();
-		String sparql = "SELECT DISTINCT ?s WHERE { ?s a <" + typeUri + "> } LIMIT " + limit;
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri, sparql);
-		ResultSet res = qExec.execSelect();
+		String sparql = "SELECT DISTINCT ?s WHERE { ?s a <" + typeUri
+				+ "> } LIMIT " + limit;
+		ResultSet res = execSelect(sparql);
 		while (res.hasNext()) {
 			QuerySolution sol = res.nextSolution();
 			resources.add(sol.getResource("s").getURI());
@@ -65,7 +69,8 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 	}
 
 	@Override
-	public Set<String> resources(Set<ClassPartition> classes, int limit) {
+	public Set<String> resources(Set<ClassPartition> classes, int limit)
+			throws Exception {
 		List<String> resources = new ArrayList<String>(limit + 10);
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n SELECT ?s WHERE{ ");
@@ -78,14 +83,13 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		// get rid of the last union
 		buffer.setLength(buffer.length() - 6);
 		buffer.append("}");
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri,
-				buffer.toString());
-		ResultSet res = qExec.execSelect();
+		ResultSet res = execSelect(buffer.toString());
 		while (res.hasNext()) {
 			QuerySolution sol = res.nextSolution();
 			resources.add(sol.getResource("s").getURI());
 		}
-		return limit<resources.size()?sample(resources,limit):new HashSet<String>(resources);
+		return limit < resources.size() ? sample(resources, limit)
+				: new HashSet<String>(resources);
 	}
 
 	private Set<String> sample(List<String> input, int subsetSize) {
@@ -100,11 +104,9 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		return new HashSet<String>(input.subList(0, subsetSize));
 	}
 
-	public String getResource(String typeUri) {
+	public String getResource(String typeUri) throws Exception {
 		String sparql = "SELECT ?s WHERE { ?s a <" + typeUri + ">} LIMIT 1";
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri,
-				sparql);
-		ResultSet res = qExec.execSelect();
+		ResultSet res = execSelect(sparql);
 		String resource = null;
 		if (res.hasNext()) {
 			QuerySolution sol = res.nextSolution();
@@ -113,7 +115,8 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		return resource;
 	}
 
-	public Node getValues(Set<String> resources, String property) {
+	public Node getValues(Set<String> resources, String property)
+			throws Exception {
 		// TODO remove this
 		try {
 			Thread.sleep(100);
@@ -125,9 +128,7 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 				+ "> ?o. FILTER (" + getOrClause("r", resources) + ") }";
 		logger.debug("Executing \n" + sparql);
 		long start = System.currentTimeMillis();
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri,
-				sparql);
-		ResultSet res = qExec.execSelect();
+		ResultSet res = execSelect(sparql);
 		long end = System.currentTimeMillis();
 		logger.debug("It took " + (end - start) + " milli second");
 		Set<String> uris = new HashSet<String>();
@@ -154,12 +155,10 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 	}
 
 	@Override
-	public Set<ClassPartition> classes(int limit) {
+	public Set<ClassPartition> classes(int limit) throws Exception {
 		logger.debug("Executing \n" + TYPES_WITH_COUNTS_SPARQL);
 		long start = System.currentTimeMillis();
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri,
-				TYPES_WITH_COUNTS_SPARQL + limit);
-		ResultSet res = qExec.execSelect();
+		ResultSet res = execSelect(TYPES_WITH_COUNTS_SPARQL + limit);
 		long end = System.currentTimeMillis();
 		logger.debug("It took " + (end - start) + " milli second");
 		Set<ClassPartition> classes = new HashSet<ClassPartition>();
@@ -172,7 +171,8 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 	}
 
 	public Map<String, AnnotatedSet> getValuesForSeveralProperties(
-			Set<String> resources, String[] properties, int num) {
+			Set<String> resources, String[] properties, int num)
+			throws Exception {
 		// TODO remove this
 		try {
 			Thread.sleep(200);
@@ -195,9 +195,7 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		String sparql = builder.toString();
 		logger.debug("Executing \n" + sparql);
 		long start = System.currentTimeMillis();
-		QueryExecution qExec = QueryExecutionFactory.sparqlService(endpointUri,
-				sparql);
-		ResultSet res = qExec.execSelect();
+		ResultSet res = execSelect(sparql);
 		long end = System.currentTimeMillis();
 		logger.debug("It took " + (end - start) + " milli second");
 		// collect properties values in a map. key is the property. value is a
@@ -238,6 +236,63 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		return map;
 	}
 
+	public Map<String, AnnotatedSet> getNeighbours(Set<String> resources)
+			throws Exception {
+		// TODO remove this
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+
+		StringBuilder builder = new StringBuilder(
+				"SELECT ?p ?o WHERE  { ?s ?p ?o . FILTER (?s IN (");
+		for (String s : resources) {
+			builder.append("<").append(s).append(">, ");
+		}
+		builder.setLength(builder.length() - 2);
+		builder.append("))}");
+		String sparql = builder.toString();
+		logger.debug("Executing \n" + sparql);
+		long start = System.currentTimeMillis();
+		ResultSet res = execSelect(sparql);
+		long end = System.currentTimeMillis();
+		logger.debug("It took " + (end - start) + " milli second");
+		// collect properties values in a map. key is the property. value is a
+		// pair of sets one for URIs and the other is for literals
+		Map<String, AnnotatedSet> map = new HashMap<String, AnnotatedSet>();
+		while (res.hasNext()) {
+			QuerySolution sol = res.nextSolution();
+			RDFNode o = sol.get("o");
+			String p = sol.getResource("p").getURI();
+			if (o.canAs(Literal.class)) {
+				if (map.containsKey(p)) {
+					map.get(p).add(o.asLiteral().getString());
+					map.get(p).setType(AnnotatedSet.LITERALS);
+				} else {
+					AnnotatedSet set = new AnnotatedSet(AnnotatedSet.LITERALS, NODE_SIZE_LIMIT);
+					set.add(o.asLiteral().getString());
+					map.put(p, set);
+				}
+			} else if (o.canAs(Resource.class)) {
+				String rUri = o.asResource().getURI();
+				// TODO I am ignoring blank nodes
+				if (rUri != null) {
+					if (map.containsKey(p)) {
+						map.get(p).add(rUri);
+						map.get(p).setType(AnnotatedSet.RESOURCES);
+					} else {
+						AnnotatedSet set = new AnnotatedSet(
+								AnnotatedSet.RESOURCES, NODE_SIZE_LIMIT);
+						set.add(rUri);
+						map.put(p, set);
+					}
+				}
+			}
+		}
+		return map;
+	}
+
 	private Object getPropertyPattern(String subjectVarname, String p,
 			String objectVarname, int i) {
 		return "?" + subjectVarname + " <" + p + "> ?" + objectVarname
@@ -263,5 +318,20 @@ public class SparqlEndpointProxyImpl implements SparqlEndpointProxy {
 		return builder.toString();
 	}
 
-	private final String TYPES_WITH_COUNTS_SPARQL = "SELECT ?c (COUNT(?s) AS ?count) WHERE {?s a ?c } GROUP BY ?c ORDER BY DESC(?count) LIMIT ";
+	private ResultSet execSelect(String sparql) throws MalformedURLException,
+			UnsupportedEncodingException, IOException {
+		HttpURLConnection connection = (HttpURLConnection) new URL(endpointUri + "?query="+URLEncoder.encode(sparql, "UTF-8"))
+				.openConnection();
+		//connection.setDoInput(true);
+		//connection.setDoOutput(true);
+
+		connection.setRequestMethod("GET");
+		connection.setRequestProperty("Accept",
+				"application/sparql-results+xml");
+		InputStream response = connection.getInputStream();
+		return ResultSetFactory.fromXML(response);
+	}
+
+	private final static String TYPES_WITH_COUNTS_SPARQL = "SELECT ?c (COUNT(?s) AS ?count) WHERE {?s a ?c } GROUP BY ?c ORDER BY DESC(?count) LIMIT ";
+	private final static int NODE_SIZE_LIMIT = 12; 
 }

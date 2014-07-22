@@ -25,17 +25,17 @@ public class ResourcesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String sparqlEndpoint = req.getParameter("sparql");
 		SparqlEndpointProxy endpoint = new SparqlEndpointProxyImpl(sparqlEndpoint);
-		Set<ClassPartition> classes = endpoint.classes(LIMIT_TYPES);
-		Set<String> resources = endpoint.resources(classes, LIMIT_RESOURCES);
-		
-		InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
-		PrefixManager prefixManager = new PrefixManager(in);
-		
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Content-Type", "application/json");
 		Writer w = resp.getWriter();
 		JSONWriter writer = new JSONWriter(w);
 		try {
+			Set<ClassPartition> classes = endpoint.classes(LIMIT_TYPES);
+			Set<String> resources = endpoint.resources(classes, LIMIT_RESOURCES);
+			
+			InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
+			PrefixManager prefixManager = new PrefixManager(in);
+			
 			writer.object();
 			writer.key("code");
 			writer.value("ok");

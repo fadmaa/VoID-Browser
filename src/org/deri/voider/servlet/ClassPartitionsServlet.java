@@ -26,25 +26,25 @@ public class ClassPartitionsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String source = req.getParameter("source");
 		Set<ClassPartition> classes;
-		if(source.equals("void")){
-			String voidUrl = req.getParameter("voidUrl");
-			String dataset = req.getParameter("dataset");
-			VoidQuerier querier = new VoidQuerier();
-			classes = querier.classes(voidUrl, dataset);
-		}else{
-			String sparqlEndpoint = req.getParameter("sparql");
-			SparqlEndpointProxy endpoint = new SparqlEndpointProxyImpl(sparqlEndpoint);
-			classes = endpoint.classes(LIMIT_TYPES);
-		}
-		
-		InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
-		PrefixManager prefixManager = new PrefixManager(in);
-		
 		resp.setCharacterEncoding("UTF-8");
 		resp.setHeader("Content-Type", "application/json");
 		Writer w = resp.getWriter();
 		JSONWriter writer = new JSONWriter(w);
 		try {
+			if(source.equals("void")){
+				String voidUrl = req.getParameter("voidUrl");
+				String dataset = req.getParameter("dataset");
+				VoidQuerier querier = new VoidQuerier();
+				classes = querier.classes(voidUrl, dataset);
+			}else{
+				String sparqlEndpoint = req.getParameter("sparql");
+				SparqlEndpointProxy endpoint = new SparqlEndpointProxyImpl(sparqlEndpoint);
+				classes = endpoint.classes(LIMIT_TYPES);
+			}
+			
+			InputStream in = this.getClass().getResourceAsStream("/files/prefixes");
+			PrefixManager prefixManager = new PrefixManager(in);
+			
 			writer.object();
 			writer.key("code");
 			writer.value("ok");
